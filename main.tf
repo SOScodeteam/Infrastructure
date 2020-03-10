@@ -74,7 +74,7 @@ resource "github_repository" "template_repo" {
 resource "github_branch_protection" "template_protection" {
   repository     = github_repository.template_repo.name
   branch         = "master"
-  enforce_admins = true
+  enforce_admins = false
   required_status_checks {
     strict = true
   }
@@ -99,7 +99,7 @@ resource "github_branch_protection" "branch_protections" {
   for_each       = var.repos
   repository     = each.key
   branch         = "master"
-  enforce_admins = true
+  enforce_admins = false
   required_status_checks {
     strict = true
   }
