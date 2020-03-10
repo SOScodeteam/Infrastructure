@@ -56,6 +56,36 @@ resource "github_repository" "repositories" {
   has_downloads = true
   has_projects  = true
   has_wiki      = true
+  template {
+    owner      = "SOScodeteam"
+    repository = "OrgTemplate"
+  }
+}
+
+resource "github_repository" "template_repo" {
+  name          = "OrgTemplate"
+  private       = false
+  has_issues    = true
+  has_downloads = true
+  has_projects  = true
+  has_wiki      = true
+}
+
+resource "github_branch_protection" "template_protection" {
+  repository     = github_repository.template_repo.name
+  branch         = "master"
+  enforce_admins = true
+  required_status_checks {
+    strict = true
+  }
+  required_pull_request_reviews {
+    dismiss_stale_reviews           = true
+    required_approving_review_count = 1
+  }
+  restrictions {
+    users = []
+    teams = []
+  }
 }
 
 resource "github_team_repository" "repository_teams" {
@@ -81,4 +111,39 @@ resource "github_branch_protection" "branch_protections" {
     users = []
     teams = []
   }
+}
+
+resource "github_repository_project" "projects" {
+  for_each   = var.repos
+  name       = "Scrum Board"
+  repository = each.key
+  depends_on = [github_repository.repositories]
+}
+
+resource "github_project_column" "product_backlog" {
+  for_each   = var.repos
+  project_id = github_repository_project.projects[each.key].id
+  name       = "Product Backlog"
+}
+resource "github_project_column" "sprint_backlog" {
+  for_each   = var.repos
+  project_id = github_repository_project.projects[each.key].id
+  name       = "Sprint Backlog"
+}
+resource "github_project_column" "in_progress" {
+  for_each   = var.repos
+  project_id = github_repository_project.projects[each.key].id
+  name       = "In Progress"
+}
+
+resource "github_project_column" "for_review" {
+  for_each   = var.repos
+  project_id = github_repository_project.projects[each.key].id
+  name       = "For Review"
+}
+
+resource "github_project_column" "done" {
+  for_each   = var.repos
+  project_id = github_repository_project.projects[each.key].id
+  name       = "Done"
 }
