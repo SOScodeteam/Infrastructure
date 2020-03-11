@@ -2,6 +2,8 @@ variable "teams" {}
 variable "members" {}
 variable "repos" {}
 
+variable "GH_TOKEN" {}
+
 locals {
   team_assignments = flatten([
     for tm, mbrs in var.teams : [
@@ -22,6 +24,7 @@ locals {
 }
 
 provider "github" {
+  token = var.GH_TOKEN
   organization = "soscodeteam"
 }
 
