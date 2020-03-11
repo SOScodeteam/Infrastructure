@@ -4,6 +4,8 @@ Make a pull request against this repo to request resources or access to the gith
 
 ## ENV VARS
 
-AWS_ACCESS_KEY_ID
-AWS_SECRET_ACCESS_KEY
-GITHUB_TOKEN
+* AWS_ACCESS_KEY_ID
+
+* AWS_SECRET_ACCESS_KEY
+
+* TF_VAR_GH_TOKEN
