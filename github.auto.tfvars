@@ -4,6 +4,8 @@ teams = {
   "Ops" = []
   "20B" = ["Inix3K"]
   "20C" = []
+  "SOS_APP_TEAM" = []
+  "AR_APP_TEAM" = []
 }
 
 repos = {
