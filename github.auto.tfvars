@@ -10,6 +10,6 @@ teams = {
 
 repos = {
   "Infrastructure" = ["Ops"]
-  "SOS_App"        = ["20B"]
-  "AR_App"         = ["20C"]
+  "SOS_App"        = ["SOS_APP_TEAM","20B"]
+  "AR_App"         = ["AR_APP_TEAM"]
 }
