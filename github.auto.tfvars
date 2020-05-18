@@ -1,9 +1,10 @@
-members = ["Inix3K"]
+members = ["Inix3K","SirSpenseful"]
 
 teams = {
   "Ops" = []
   "20B" = ["Inix3K"]
   "20C" = []
+  "20E" = ["SirSpenseful"]
   "SOS_APP_TEAM" = []
   "AR_APP_TEAM" = []
 }
