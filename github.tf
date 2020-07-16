@@ -54,10 +54,6 @@ resource "github_repository" "repositories" {
   has_downloads = true
   has_projects  = true
   has_wiki      = true
-  template {
-    owner      = "SOScodeteam"
-    repository = "OrgTemplate"
-  }
 }
 
 resource "github_team_repository" "repository_teams" {
