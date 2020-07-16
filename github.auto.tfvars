@@ -1,7 +1,7 @@
 members = ["Inix3K","SirSpenseful"]
 
 teams = {
-  "Ops" = []
+  "Ops" = ["hattmo"]
   "20B" = ["Inix3K"]
   "20C" = []
   "20E" = ["SirSpenseful"]
