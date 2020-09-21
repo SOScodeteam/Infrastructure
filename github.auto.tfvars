@@ -1,16 +1,10 @@
-members = ["Inix3K","SirSpenseful"]
+members = ["SquadronOfficerSchool-Admin"]
 
 teams = {
-  "Ops" = ["hattmo"]
-  "20B" = ["Inix3K"]
-  "20C" = []
-  "20E" = ["SirSpenseful"]
-  "SOS_APP_TEAM" = []
-  "AR_APP_TEAM" = []
+  "20F" = []
 }
 
 repos = {
-  "Infrastructure" = ["Ops"]
-  "SOS_App"        = ["SOS_APP_TEAM","20B"]
-  "AR_App"         = ["AR_APP_TEAM"]
+  "SOS_App"        = ["20F"]
+  "AR_App"         = []
 }

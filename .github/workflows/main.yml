@@ -3,7 +3,7 @@ name: CICD Workflow
 on: push
 
 jobs:
-  CICD:
+  UpdateInfrastructure:
     runs-on: ubuntu-latest
 
     steps:

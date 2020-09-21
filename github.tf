@@ -24,7 +24,7 @@ locals {
 }
 
 provider "github" {
-  token = var.GH_TOKEN
+  token        = var.GH_TOKEN
   organization = "soscodeteam"
 }
 
@@ -41,22 +41,24 @@ resource "github_team" "teams" {
 }
 
 resource "github_team_membership" "team_memberships" {
-  count    = length(local.team_assignments)
-  team_id  = github_team.teams[local.team_assignments[count.index].team].id
-  username = local.team_assignments[count.index].member
+  depends_on = [github_team.teams, github_membership.members]
+  count      = length(local.team_assignments)
+  team_id    = github_team.teams[local.team_assignments[count.index].team].id
+  username   = local.team_assignments[count.index].member
 }
 
 resource "github_repository" "repositories" {
   for_each      = var.repos
   name          = each.key
-  private       = false
   has_issues    = true
   has_downloads = true
   has_projects  = true
   has_wiki      = true
+  auto_init     = true
 }
 
 resource "github_team_repository" "repository_teams" {
+  depends_on = [github_repository.repositories, github_team.teams]
   count      = length(local.repo_assignments)
   team_id    = github_team.teams[local.repo_assignments[count.index].team].id
   repository = local.repo_assignments[count.index].repo
@@ -64,6 +66,7 @@ resource "github_team_repository" "repository_teams" {
 }
 
 resource "github_branch_protection" "branch_protections" {
+  depends_on     = [github_repository.repositories]
   for_each       = var.repos
   repository     = each.key
   branch         = "master"
@@ -79,39 +82,4 @@ resource "github_branch_protection" "branch_protections" {
     users = []
     teams = []
   }
-}
-
-resource "github_repository_project" "projects" {
-  for_each   = var.repos
-  name       = "Scrum Board"
-  repository = each.key
-  depends_on = [github_repository.repositories]
-}
-
-resource "github_project_column" "product_backlog" {
-  for_each   = var.repos
-  project_id = github_repository_project.projects[each.key].id
-  name       = "Product Backlog"
-}
-resource "github_project_column" "sprint_backlog" {
-  for_each   = var.repos
-  project_id = github_repository_project.projects[each.key].id
-  name       = "Sprint Backlog"
-}
-resource "github_project_column" "in_progress" {
-  for_each   = var.repos
-  project_id = github_repository_project.projects[each.key].id
-  name       = "In Progress"
-}
-
-resource "github_project_column" "for_review" {
-  for_each   = var.repos
-  project_id = github_repository_project.projects[each.key].id
-  name       = "For Review"
-}
-
-resource "github_project_column" "done" {
-  for_each   = var.repos
-  project_id = github_repository_project.projects[each.key].id
-  name       = "Done"
 }
