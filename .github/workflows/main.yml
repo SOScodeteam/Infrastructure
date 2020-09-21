@@ -1,4 +1,4 @@
-name: CICD Workflow
+name: Infrastructure Workflow
 
 on: push
 
@@ -10,7 +10,9 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
     - name: Setup Terraform
-      uses: volcano-coffee-company/setup-terraform@v1.0.3
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 0.13.3
     - name: Check Terraform Version
       run: terraform --version
     - name: Run Terraform Plan
