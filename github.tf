@@ -79,7 +79,7 @@ resource "github_branch_protection" "branch_protections" {
     required_approving_review_count = 1
   }
   restrictions {
-    users = []
+    users = var.members
     teams = []
   }
 }

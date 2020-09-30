@@ -8,4 +8,5 @@ repos = {
   "SOS_App"        = ["20F"]
   "AR_App"         = []
   "SOS_App_Py"     = ["20F"]
+  "SOS_App_Angular" = ["20F"]
 }
